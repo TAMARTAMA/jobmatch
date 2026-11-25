@@ -1,0 +1,36 @@
+
+@host = http://localhost:5113
+
+POST {{host}}/api/JobPostings
+Content-Type: application/json
+
+{
+  "title": "Full Stack Developer",
+  "company": "מת\"ף",
+  "location": "ראשון לציון",
+  "description": "C#, .NET, Angular, SQL Server"
+}
+
+###
+GET {{host}}/api/JobPostings
+
+###
+PATCH {{host}}/api/JobPostings/1/status
+Content-Type: application/json
+
+{ "status": "Applied" }
+
+###
+DELETE {{host}}/api/JobPostings/1
+
+###
+GET {{host}}/api/Resumes
+
+###
+GET {{host}}/api/Resumes/1
+
+###
+POST {{host}}/api/Resumes
+Content-Type: application/json
+
+{ "name": "John Doe", "email": "john.doe@example.com", "phone": "1234567890", "address": "123 Main St", "city": "Anytown", "state": "CA", "zip": "12345", "country": "USA" }
