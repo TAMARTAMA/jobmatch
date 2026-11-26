@@ -8,7 +8,7 @@ public static class ChatClientFactory
 {
     public static IChatClient Create(IConfiguration config)
     {
-        var provider = config["AI:Provider"] ?? "GitHubModels";
+        var provider = config["AI:Provider"] ?? "OpenAICompatible";
         var model = config["AI:Model"]
             ?? throw new InvalidOperationException("Missing AI:Model in appsettings.json");
         var apiKey = config["AI:ApiKey"]
@@ -16,11 +16,13 @@ public static class ChatClientFactory
 
         return provider switch
         {
-            "GitHubModels" => new OpenAIClient(
+            // כל ספק שתומך בפרוטוקול של OpenAI: Gemini, Ollama, OpenAI עצמה
+            "OpenAICompatible" => new OpenAIClient(
                     new ApiKeyCredential(apiKey),
                     new OpenAIClientOptions
                     {
-                        Endpoint = new Uri(config["AI:Endpoint"] ?? "https://models.github.ai/inference")
+                        Endpoint = new Uri(config["AI:Endpoint"]
+                            ?? throw new InvalidOperationException("Missing AI:Endpoint"))
                     })
                 .GetChatClient(model)
                 .AsIChatClient(),
