@@ -9,8 +9,7 @@ namespace JobMatch.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class JobPostingsController(JobMatchDbContext db) : ControllerBase
-{
+public class JobPostingsController(JobMatchDbContext db, ILogger<JobPostingsController> logger) : ControllerBase{
     [HttpGet]
     public async Task<List<JobPostingDto>> GetAll() =>
         (await db.JobPostings
@@ -97,6 +96,7 @@ public class JobPostingsController(JobMatchDbContext db) : ControllerBase
         }
         catch (Exception ex)
         {
+            logger.LogError(ex, "Job analysis failed for job {JobId}", id);
             return Problem(title: "The AI analysis failed", detail: ex.Message, statusCode: 502);
         }
 

@@ -4,7 +4,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { JobPostings } from '../../services/job-postings';
 import { JobPosting } from '../../models/job-posting';
 import { JobAnalysis, JobSkill } from '../../models/job-analysis';
-
+import { HttpErrorResponse } from '@angular/common/http';
 @Component({
   imports: [RouterLink, DatePipe],
   selector: 'app-job-detail',
@@ -49,13 +49,13 @@ export class JobDetail implements OnInit {
       next: (result) => {
         this.analysis.set(result);
         this.skills.set([
-          ...result.requiredSkills.map((name) => ({ name, isRequired: true })),
-          ...result.niceToHaveSkills.map((name) => ({ name, isRequired: false })),
+          ...result.requiredSkills.map((name: string) => ({ name, isRequired: true })),
+          ...result.niceToHaveSkills.map((name: string) => ({ name, isRequired: false })),
         ]);
         this.analyzing.set(false);
       },
-      error: () => {
-        this.error.set('הניתוח נכשל. בדקי בטרמינל של השרת מה השגיאה.');
+      error: (err: HttpErrorResponse) => {
+        this.error.set('הניתוח נכשל: ' + (err.error?.detail ?? err.message));
         this.analyzing.set(false);
       },
     });
