@@ -2,7 +2,7 @@ import { Component, OnInit, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Resumes } from '../../services/resumes';
+import { Resumes } from '../../services/resume';
 
 @Component({
   imports: [ReactiveFormsModule, RouterLink],

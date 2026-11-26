@@ -1,7 +1,7 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { Resumes } from '../../services/resumes';
+import { Resumes } from '../../services/resume';
 import { Resume } from '../../models/resume';
 
 @Component({
