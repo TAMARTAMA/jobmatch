@@ -1,12 +1,12 @@
 
 export interface Resume {
-    id: number;
-    title: string;
-    content: string;
-    createdAt: string;
+  id: number;
+  title: string;
+  content: string;
+  createdAt: string;
 }
 
-export interface CreateResume {
-    title: string;
-    content: string;
+export interface SaveResume {
+  title: string;
+  content: string;
 }

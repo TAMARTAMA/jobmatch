@@ -3,3 +3,4 @@
 .topbar a { color: white; text-decoration: none; }
 .logo { font-weight: bold; font-size: 1.2rem; }
 .container { max-width: 900px; margin: 24px auto; padding: 0 16px; }
+.nav { display: flex; gap: 16px; }

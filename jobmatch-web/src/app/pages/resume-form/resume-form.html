@@ -1,1 +1,26 @@
-<p>resume-form works!</p>
+<a routerLink="/resumes">→ חזרה לרשימה</a>
+<h1>{{ editId() === null ? 'קורות חיים חדשים' : 'עריכת קורות חיים' }}</h1>
+
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <label>
+    שם הגרסה *
+    <input formControlName="title" placeholder="למשל: Full Stack – גרסה לבנקים" />
+  </label>
+  @if (form.controls.title.touched && form.controls.title.invalid) {
+    <span class="error">שדה חובה, עד 200 תווים</span>
+  }
+
+  <label>
+    תוכן קורות החיים *
+    <textarea formControlName="content" rows="16" placeholder="הדביקי כאן את הטקסט של קורות החיים"></textarea>
+  </label>
+  @if (form.controls.content.touched && form.controls.content.invalid) {
+    <span class="error">שדה חובה</span>
+  }
+
+  @if (error()) {
+    <p class="error">{{ error() }}</p>
+  }
+
+  <button type="submit" [disabled]="saving()">{{ saving() ? 'שומר...' : 'שמירה' }}</button>
+</form>
