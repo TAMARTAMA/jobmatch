@@ -31,3 +31,9 @@ Content-Type: application/json
   "title": "קורות חיים – Full Stack",
   "content": "מפתחת Full Stack. React, Next.js, TypeScript, PostgreSQL..."
 }
+
+###
+POST {{host}}/api/JobPostings/1/analyze
+
+###
+GET {{host}}/api/JobPostings/1/skills

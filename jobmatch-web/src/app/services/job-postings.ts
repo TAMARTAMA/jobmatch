@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { CreateJobPosting, JobPosting, JobStatus } from '../models/job-posting';
+import { JobAnalysis, JobSkill } from '../models/job-analysis'
 
 @Injectable({
   providedIn: 'root'
@@ -30,5 +31,13 @@ export class JobPostings {
 
   delete(id: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${id}`);
+  }
+
+  getSkills(id: number): Observable<JobSkill[]> {
+    return this.http.get<JobSkill[]>(`${this.baseUrl}/${id}/skills`);
+  }
+
+  analyze(id: number): Observable<JobAnalysis> {
+    return this.http.post<JobAnalysis>(`${this.baseUrl}/${id}/analyze`, {});
   }
 }

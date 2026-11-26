@@ -1,2 +1,7 @@
 .meta { color: #6b7280; }
 .description { white-space: pre-wrap; font-family: inherit; background: white; padding: 16px; border-radius: 8px; border: 1px solid #e5e7eb; }
+.analysis { background: white; padding: 16px; border-radius: 8px; border: 1px solid #e5e7eb; margin: 16px 0; }
+.analysis-header { display: flex; justify-content: space-between; align-items: center; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { background: #e5e7eb; border-radius: 999px; padding: 4px 12px; font-size: 0.9rem; }
+.chip.required { background: #1f2937; color: white; }
