@@ -1,0 +1,28 @@
+<h1>המשרות שלי</h1>
+
+@if (error()) {
+  <p class="error">{{ error() }}</p>
+}
+
+@if (loading()) {
+  <p>טוען...</p>
+} @else {
+  @for (job of jobs(); track job.id) {
+    <div class="card">
+      <div>
+        <a [routerLink]="['/jobs', job.id]" class="title">{{ job.title }}</a>
+        <div class="meta">{{ job.company }} · {{ job.location }} · {{ job.createdAt | date: 'dd/MM/yyyy' }}</div>
+      </div>
+      <div class="actions">
+        <select [value]="job.status" (change)="changeStatus(job, $any($event.target).value)">
+          @for (s of statuses; track s) {
+            <option [value]="s">{{ s }}</option>
+          }
+        </select>
+        <button (click)="remove(job)">מחיקה</button>
+      </div>
+    </div>
+  } @empty {
+    <p>אין עדיין משרות. <a routerLink="/jobs/new">הוסיפי משרה ראשונה</a></p>
+  }
+}

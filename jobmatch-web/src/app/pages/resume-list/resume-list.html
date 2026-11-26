@@ -1,0 +1,27 @@
+<div class="header">
+    <h1>קורות החיים שלי</h1>
+    <a routerLink="/resumes/new">+ קורות חיים חדשים</a>
+  </div>
+  
+  @if (error()) {
+    <p class="error">{{ error() }}</p>
+  }
+  
+  @if (loading()) {
+    <p>טוען...</p>
+  } @else {
+    @for (resume of resumes(); track resume.id) {
+      <div class="card">
+        <div>
+          <div class="title">{{ resume.title }}</div>
+          <div class="meta">נוסף {{ resume.createdAt | date: 'dd/MM/yyyy' }} · {{ resume.content.length }} תווים</div>
+        </div>
+        <div class="actions">
+          <a [routerLink]="['/resumes', resume.id, 'edit']">עריכה</a>
+          <button (click)="remove(resume)">מחיקה</button>
+        </div>
+      </div>
+    } @empty {
+      <p>אין עדיין קורות חיים. <a routerLink="/resumes/new">הוסיפי את הראשונים</a></p>
+    }
+  }
