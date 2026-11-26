@@ -11,8 +11,15 @@ builder.Services.AddDbContext<JobMatchDbContext>(options =>
         builder.Configuration.GetConnectionString("JobMatch")
     )
 );
+builder.Services.AddCors(options =>
+    options.AddPolicy("Angular", policy =>
+        policy.WithOrigins("http://localhost:4200")
+              .AllowAnyHeader()
+              .AllowAnyMethod()));
 
 var app = builder.Build();
+
+app.UseCors("Angular");
 
 if (app.Environment.IsDevelopment())
 {
