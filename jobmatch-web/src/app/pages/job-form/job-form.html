@@ -1,1 +1,30 @@
-<p>job-form works!</p>
+<h1>משרה חדשה</h1>
+
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <label>
+    שם המשרה *
+    <input formControlName="title" />
+  </label>
+  @if (form.controls.title.touched && form.controls.title.invalid) {
+    <span class="error">שדה חובה, עד 200 תווים</span>
+  }
+
+  <label>חברה <input formControlName="company" /></label>
+  <label>מיקום <input formControlName="location" /></label>
+
+  <label>
+    תיאור המשרה *
+    <textarea formControlName="description" rows="8"></textarea>
+  </label>
+  @if (form.controls.description.touched && form.controls.description.invalid) {
+    <span class="error">שדה חובה</span>
+  }
+
+  <label>קישור למודעה <input formControlName="url" dir="ltr" /></label>
+
+  @if (error()) {
+    <p class="error">{{ error() }}</p>
+  }
+
+  <button type="submit" [disabled]="saving()">{{ saving() ? 'שומר...' : 'שמירה' }}</button>
+</form>

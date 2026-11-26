@@ -1,1 +1,14 @@
-<p>job-detail works!</p>
+<a routerLink="/">→ חזרה לרשימה</a>
+
+@if (error()) {
+  <p class="error">{{ error() }}</p>
+}
+
+@if (job(); as j) {
+  <h1>{{ j.title }}</h1>
+  <p class="meta">{{ j.company }} · {{ j.location }} · סטטוס: {{ j.status }} · נוספה {{ j.createdAt | date: 'dd/MM/yyyy' }}</p>
+  @if (j.url) {
+    <p><a [href]="j.url" target="_blank" rel="noopener">למודעה המקורית</a></p>
+  }
+  <pre class="description">{{ j.description }}</pre>
+}
