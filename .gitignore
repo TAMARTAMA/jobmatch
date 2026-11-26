@@ -6,6 +6,7 @@
 # git switch server
 # git merge origin/develop
 # git push origin server
+# git merge --no-ff angular_ui -m "Merge Angular UI into master"
 ## Get latest from `dotnet new gitignore`
 
 # dotenv files

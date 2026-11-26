@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using JobMatch.Api.Data;
-
+using JobMatch.Api.AI;
+using JobMatch.Api.Agents;
+using Microsoft.Extensions.AI;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +18,10 @@ builder.Services.AddCors(options =>
         policy.WithOrigins("http://localhost:4200")
               .AllowAnyHeader()
               .AllowAnyMethod()));
+
+builder.Services.AddSingleton<IChatClient>(sp =>
+    ChatClientFactory.Create(sp.GetRequiredService<IConfiguration>()));
+builder.Services.AddSingleton<JobAnalyzerAgent>();
 
 var app = builder.Build();
 

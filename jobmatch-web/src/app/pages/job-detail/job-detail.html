@@ -10,5 +10,43 @@
   @if (j.url) {
     <p><a [href]="j.url" target="_blank" rel="noopener">למודעה המקורית</a></p>
   }
+
+  <section class="analysis">
+    <div class="analysis-header">
+      <h2>ניתוח המשרה</h2>
+      <button (click)="analyze()" [disabled]="analyzing()">
+        {{ analyzing() ? 'הסוכן מנתח...' : (skills().length ? 'ניתוח מחדש' : 'ניתוח עם הסוכן') }}
+      </button>
+    </div>
+
+    @if (analysis(); as a) {
+      <p>{{ a.summary }}</p>
+      <p class="meta">
+        @if (a.seniority) { רמה: {{ a.seniority }} · }
+        @if (a.minYearsExperience !== null) { ניסיון מינימלי: {{ a.minYearsExperience }} שנים }
+      </p>
+    }
+
+    @if (skills().length) {
+      <h3>כישורי חובה</h3>
+      <div class="chips">
+        @for (s of requiredSkills(); track s.name) {
+          <span class="chip required">{{ s.name }}</span>
+        }
+      </div>
+      <h3>יתרון</h3>
+      <div class="chips">
+        @for (s of niceSkills(); track s.name) {
+          <span class="chip">{{ s.name }}</span>
+        } @empty {
+          <span class="meta">אין</span>
+        }
+      </div>
+    } @else if (!analyzing()) {
+      <p class="meta">המשרה עדיין לא נותחה.</p>
+    }
+  </section>
+
+  <h2>תיאור המשרה</h2>
   <pre class="description">{{ j.description }}</pre>
 }
